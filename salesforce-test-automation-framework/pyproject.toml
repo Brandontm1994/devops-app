@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "salesforce_autotest"
+version = "1.0.0"
+description = "Salesforce-specific UI recorder + YAML-based test runner"
+authors = [
+  {name="Innovation Software Factory", email="engineering@innovation.af.mil"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+  "selenium>=4.17.0",
+  "pyyaml>=6.0",
+]
+
+[project.urls]
+Homepage = "https://innovation.softwarefactory.af.mil"
+Documentation = "https://innovation.softwarefactory.af.mil/docs/autotest"
+Source = "https://github.com/your-org/salesforce_autotest"
