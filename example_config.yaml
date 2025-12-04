@@ -1,0 +1,14 @@
+auth:
+  client_id_env: SALESFORCE_CLIENT_ID
+  client_secret_env: SALESFORCE_CLIENT_SECRET
+  username_env: SALESFORCE_USERNAME
+  password_env: SALESFORCE_PASSWORD
+  security_token_env: SALESFORCE_SECURITY_TOKEN
+  domain: login
+
+test_plan:
+  classes:
+    - ExampleTestClass
+  synchronous: false
+  api_version: "58.0"
+  timeout_seconds: 300
