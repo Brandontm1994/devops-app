@@ -1,0 +1,13 @@
+include README.md
+include VERSION
+
+recursive-include salesforce_autotest *.py
+recursive-include salesforce_autotest *.yaml
+recursive-include salesforce_autotest *.json
+recursive-include salesforce_autotest *.txt
+
+recursive-include tests *.yaml
+recursive-include tests *.md
+
+global-exclude __pycache__
+global-exclude *.pyc
