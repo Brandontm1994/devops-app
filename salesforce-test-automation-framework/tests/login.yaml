@@ -1,0 +1,34 @@
+name: "Salesforce Login Test"
+description: "Validates login into Salesforce Lightning."
+
+steps:
+  - action: navigate
+    url: "https://login.salesforce.com"
+
+  - action: input
+    locator:
+      type: salesforce_dynamic
+      target: "username"
+    value: "${SF_USERNAME}"
+
+  - action: input
+    locator:
+      type: salesforce_dynamic
+      target: "password"
+    value: "${SF_PASSWORD}"
+
+  - action: click
+    locator:
+      type: salesforce_dynamic
+      target: "Login"
+
+  - action: wait_for
+    locator:
+      type: salesforce_dynamic
+      target: "Home"
+    timeout: 15
+
+  - action: assert_visible
+    locator:
+      type: salesforce_dynamic
+      target: "Home"
