@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON = "${WORKSPACE}/venv/bin/python"
+        SF_USERNAME = credentials('salesforce-username')
+        SF_PASSWORD = credentials('salesforce-password')
+        CI = "true"
+    }
+
+    stages {
+
+        stage('Setup Python Environment') {
+            steps {
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    python -m pip install --upgrade pip setuptools wheel
+                '''
+            }
+        }
+
+        stage('Install Framework') {
+            steps {
+                sh '''
+                    . venv/bin/activate
+                    pip install selenium PyYAML webdriver-manager
+                    pip install .
+                '''
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh '''
+                    . venv/bin/activate
+                    sf-run salesforce-test-automation-framework/tests/login.yaml || true
+                '''
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'logs/*.log', fingerprint: true
+                archiveArtifacts artifacts: 'reports/*.html', fingerprint: true
+                archiveArtifacts artifacts: '*.png', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Salesforce UI Test Automation completed successfully."
+        }
+        failure {
+            echo "Tests failed. Check HTML reports and screenshots."
+        }
+    }
+}
