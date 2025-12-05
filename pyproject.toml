@@ -1,0 +1,5 @@
+[tool.setuptools.packages]
+find = {}
+
+[tool.setuptools.package-data]
+"salesforce_autotest" = ["*.yaml", "*.md", "*.json", "*.txt"]
