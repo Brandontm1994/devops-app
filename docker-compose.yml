@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: ./salesforce-test-automation-framework/recorder_web/backend
+    container_name: recorder_backend
+    ports:
+      - "5001:5001"
+    environment:
+      - CHROME_DEBUG_PORT=9222
+    volumes:
+      - ./salesforce-test-automation-framework:/app
+    networks:
+      - recorder-net
+
+  frontend:
+    build: ./salesforce-test-automation-framework/recorder_web/frontend
+    container_name: recorder_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - recorder-net
+
+networks:
+  recorder-net:
+    driver: bridge
